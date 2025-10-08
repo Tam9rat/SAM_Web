@@ -1,0 +1,191 @@
+/* Enhanced SAM v3.0 - Custom Styles */
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom animation delays for staggered animations */
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Custom float animation */
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-10px); 
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Custom gradient animation for backgrounds */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 400% 400%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #2563eb, #7c3aed);
+}
+
+/* Enhanced focus states for accessibility */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Custom selection color */
+::selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: #1e293b;
+}
+
+/* Smooth entrance animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Pulse animation for call-to-action elements */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+/* Custom backdrop blur for better browser support */
+.custom-backdrop-blur {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Enhanced shadow effects */
+.shadow-3xl {
+  box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+}
+
+.shadow-glow {
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+}
+
+/* Responsive text scaling */
+@media (max-width: 640px) {
+  .text-responsive-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+}
+
+@media (min-width: 641px) {
+  .text-responsive-xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-responsive-xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  * {
+    color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .bg-gradient-to-r {
+    background: #000 !important;
+    color: #fff !important;
+  }
+  
+  .text-gray-600 {
+    color: #000 !important;
+  }
+  
+  .border-white\/20 {
+    border-color: #000 !important;
+  }
+}
