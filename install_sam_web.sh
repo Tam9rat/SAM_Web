@@ -29,13 +29,8 @@ apt-get install -y git curl"
 # --- Install Docker ---
 if ! command -v docker >/dev/null 2>&1; then
   say "Installing Docker..."
-
-  # Remove conflicting packages if they exist
   run "apt-get remove -y containerd runc 2>/dev/null || true"
-
-  # Install Docker
   run "apt-get install -y docker.io docker-compose-plugin"
-
   run "systemctl enable --now docker"
   say "Docker installed: $(docker --version)"
 else
@@ -51,11 +46,52 @@ else
   git clone "$REPO_URL" "$INSTALL_DIR" || fail "git clone failed"
 fi
 
-# --- Build and start ---
 cd "$INSTALL_DIR"
 
+# --- Create .dockerignore ---
+say "Creating .dockerignore..."
+cat > .dockerignore <<'EOF'
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+build
+dist
+.vite
+*.local
+.git
+.gitignore
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+coverage
+.nyc_output
+.env
+.env.local
+.env.*.local
+*.log
+README.md
+docs
+*.md
+.github
+.gitlab-ci.yml
+EOF
+
+# --- Remove local node_modules ---
+if [[ -d "node_modules" ]]; then
+  say "Removing local node_modules..."
+  rm -rf node_modules
+fi
+
+# --- Build and start ---
 say "Stopping any running containers..."
 docker compose down 2>/dev/null || true
+
+say "Cleaning Docker cache..."
+docker builder prune -f || true
 
 say "Building Docker image..."
 docker compose build --no-cache
@@ -74,7 +110,7 @@ fi
 # --- Install systemd service ---
 say "Installing systemd service..."
 UNIT="/etc/systemd/system/${SERVICE_NAME}.service"
-run "cat > '$UNIT' <<'EOF'
+run "cat > '$UNIT' <<'SERVICEEOF'
 [Unit]
 Description=SAM Web Application
 After=network-online.target docker.service
@@ -90,25 +126,27 @@ RestartSec=10
 
 [Install]
 WantedBy=multi-user.target
-EOF
+SERVICEEOF
 systemctl daemon-reload
 systemctl enable ${SERVICE_NAME}"
 
 say "Installation complete! ✓"
 echo ""
-
-
-
-chmod +x "$INSTALL_DIR/start.sh"
-say "Management script created: $INSTALL_DIR/start.sh"
-
+echo "========================================"
+echo "🌐 SAM Web Application"
+echo "========================================"
+echo "Application: http://$(hostname -I | awk '{print $1}'):8082"
 echo ""
-echo "========================================"
-echo "Application: http://<your-ip>:8082"
-echo "========================================"
-echo "Commands:"
-echo "  Status:  docker compose ps"
-echo "  Logs:    docker compose logs -f"
-echo "  Stop:    docker compose down"
-echo "  Restart: sudo systemctl restart ${SERVICE_NAME}"
-echo "========================================"
+echo "📋 Management Commands:"
+echo "  cd ~/SAM_Web"
+echo "  ./start.sh up       - Start"
+echo "  ./start.sh down     - Stop"
+echo "  ./start.sh restart  - Restart"
+echo "  ./start.sh update   - Pull & rebuild"
+echo "  ./start.sh logs     - View logs"
+echo "  ./start.sh status   - Status"
+echo ""
+echo "⚙️  Systemd:"
+echo "  sudo systemctl restart ${SERVICE_NAME}"
+echo "  sudo systemctl status ${SERVICE_NAME}"
+echo "======================================"
