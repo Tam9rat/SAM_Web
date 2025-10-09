@@ -131,10 +131,6 @@ const Hero = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="inline-flex items-center gap-2 bg-green-100 backdrop-blur-sm px-4 py-2 rounded-full border border-green-200 mb-6 shadow-sm">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-lg shadow-green-400/50" />
-                <span className="text-sm font-semibold text-green-700">Trusted by 1,000+ Italian Families</span>
-              </div>
 
               <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6 text-gray-900">
                 Finally Sleep
@@ -149,7 +145,7 @@ const Hero = () => {
 
               <div className="space-y-3 mb-8">
                 {[
-                  'AI detects falls, missed meals, unusual patterns instantly',
+                  'AI-powered detects unusual activity and daily routine changes in real time.',
                   'Zero cameras - complete privacy with motion sensors only',
                   'Smart alerts only when something truly matters'
                 ].map((text, i) => (
@@ -178,7 +174,7 @@ const Hero = () => {
 
               <div className="grid grid-cols-3 gap-6">
                 {[
-                  { icon: Clock, value: '2min', label: 'Setup Time' },
+                  { icon: Clock, value: '5min', label: 'Setup Time' },
                   { icon: Camera, value: '0', label: 'Cameras' },
                   { icon: Shield, value: '24/7', label: 'Monitoring' }
                 ].map((stat, i) => (
@@ -211,10 +207,10 @@ const Hero = () => {
 
                 <div className="space-y-3">
                   {[
-                    { time: '07:30', activity: 'Morning Coffee', status: 'completed', color: 'green' },
-                    { time: '09:00', activity: 'Medication Taken', status: 'completed', color: 'green' },
-                    { time: '12:30', activity: 'Lunch Prepared', status: 'completed', color: 'green' },
-                    { time: '14:00', activity: 'Walking Around', status: 'active', color: 'blue' }
+                    { time: '07:30', activity: 'Morning Movement', status: 'completed', color: 'green' },
+                    { time: '09:00', activity: 'Kitchen Activity', status: 'completed', color: 'green' },
+                    { time: '12:30', activity: 'Bathroom Visit', status: 'completed', color: 'green' },
+                    { time: '14:00', activity: 'Extended Inactivity', status: 'active', color: 'blue' }
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-3 bg-gray-50 rounded-xl p-4 border border-gray-200">
                       <div className="text-gray-500 font-mono text-sm w-16">{item.time}</div>
@@ -234,7 +230,7 @@ const Hero = () => {
                     <div>
                       <div className="text-gray-900 font-semibold mb-1">AI Learning</div>
                       <div className="text-gray-600 text-sm">
-                        Maria is 15% more active today. This is a positive trend! 🌟
+                        Maria’s activity rhythm is consistent with her daily routine. 🌟
                       </div>
                     </div>
                   </div>
@@ -292,10 +288,7 @@ const ProblemSection = () => {
         <div className={`text-center mb-16 transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
-          <div className="inline-flex items-center gap-2 bg-red-100 text-red-700 px-4 py-2 rounded-full font-semibold mb-6">
-            <AlertTriangle className="w-4 h-4" />
-            The Problem Nobody Talks About
-          </div>
+
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
             You're Not Alone in
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-600">
@@ -481,7 +474,7 @@ const HowItWorksSection = () => {
     {
       number: '3',
       title: 'Intelligent Monitoring',
-      description: 'AI continuously analyzes patterns and only alerts when something unusual happens: missed meals, falls, extended inactivity.',
+      description: 'AI continuously analyzes patterns and only alerts when something unusual happens: missed meals, extended inactivity.',
       icon: Bell,
       time: 'Ongoing'
     }
@@ -792,7 +785,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              AI-powered elder care monitoring that respects privacy and dignity. Made in Italy with love.
+              AI-powered elder care monitoring that respects privacy and dignity.
             </p>
             <div className="flex items-center gap-4">
               <img

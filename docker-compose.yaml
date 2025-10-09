@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  sam-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sam-web
+    ports:
+      - "8082:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    networks:
+      - sam-network
+
+networks:
+  sam-network:
+    driver: bridge
