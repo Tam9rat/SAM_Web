@@ -96,6 +96,13 @@ systemctl enable ${SERVICE_NAME}"
 
 say "Installation complete! ✓"
 echo ""
+
+
+
+chmod +x "$INSTALL_DIR/start.sh"
+say "Management script created: $INSTALL_DIR/start.sh"
+
+echo ""
 echo "========================================"
 echo "Application: http://<your-ip>:8082"
 echo "========================================"
