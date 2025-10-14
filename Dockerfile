@@ -1,31 +1,24 @@
 # Build stage
 FROM node:22-alpine AS build
-
 WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
-
-# Install ALL dependencies (needed for build)
+# Install deps (includes devDeps for build)
 RUN npm ci
 
-# Copy source code
+# Copy source and build
 COPY . .
-
-# Build the React app
-RUN npm run build
+RUN npm run build   # Vite outputs to /app/dist
 
 # Production stage
 FROM nginx:alpine
 
-# Copy built app to nginx
-COPY --from=build /app/build /usr/share/nginx/html
+# Copy built app to nginx (use dist, not build)
+COPY --from=build /app/dist /usr/share/nginx/html
 
-# Copy nginx config
+# Optional: custom nginx config (SPA fallback, caching, etc.)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose port
 EXPOSE 80
-
-# Start nginx
 CMD ["nginx", "-g", "daemon off;"]
