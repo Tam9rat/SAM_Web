@@ -460,7 +460,7 @@ const HowItWorksSection = () => {
     {
       number: '1',
       title: 'Quick Installation',
-      description: 'We install small motion sensors in key rooms (living room, bedroom, bathroom, kitchen). No cameras. No wiring. Done in under 2 hours.',
+      description: 'We install small motion sensors in key rooms (living room, bedroom, bathroom, kitchen, corridors). No cameras. No wiring. Done in under 2 hours.',
       icon: Home,
       time: '2 hours'
     },
